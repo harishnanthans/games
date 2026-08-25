@@ -1,0 +1,440 @@
+:root {
+  --display: "Anton", Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  --numeric: "Teko", Impact, "Arial Narrow Bold", sans-serif;
+  --ui: "Orbitron", "Arial Narrow", sans-serif;
+
+  --ink: #f2f4f8;
+  --ink-dim: #8b93a5;
+  --plate-a: #0b0d12;
+  --plate-b: #161a24;
+
+  --accent: #d1122b;
+  --accent-dim: #7d0a1a;
+  --glow: rgba(209, 18, 43, 0.45);
+
+  --gold-a: #f4d06f;
+  --gold-b: #b8860b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 0%, #1c2030 0%, #05060a 60%),
+    #05060a;
+  font-family: var(--ui);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+.stage {
+  perspective: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 40px 16px;
+}
+
+/* ---------- card shell ---------- */
+
+.card {
+  --mx: 50%;
+  --my: 50%;
+  --rx: 0deg;
+  --ry: 0deg;
+
+  position: relative;
+  width: 340px;
+  min-height: 520px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow: hidden;
+  border: 2px solid var(--accent);
+  border-radius: 20px;
+  background:
+    linear-gradient(160deg, var(--plate-b) 0%, var(--plate-a) 55%, #000 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 0 24px var(--glow),
+    0 0 70px -10px var(--glow),
+    0 26px 50px -18px rgba(0, 0, 0, 0.9);
+  transform: rotateX(var(--ry)) rotateY(var(--rx));
+  transform-style: preserve-3d;
+  transition: transform 120ms ease-out;
+}
+
+.card[data-brand="smackdown"] {
+  --accent: #1b6ef3;
+  --accent-dim: #0b3a86;
+  --glow: rgba(27, 110, 243, 0.45);
+}
+
+.card__glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  background: radial-gradient(
+    440px circle at var(--mx) var(--my),
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.05) 35%,
+    transparent 60%
+  );
+  mix-blend-mode: screen;
+}
+
+/* ---------- header ---------- */
+
+.card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.ovr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 0.78;
+}
+
+.ovr__value {
+  font-family: var(--numeric);
+  font-size: 58px;
+  font-weight: 700;
+  color: var(--ink);
+  text-shadow: 0 0 18px var(--glow);
+}
+
+.ovr__label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+.card__tags {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  padding-top: 6px;
+}
+
+.badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  padding: 4px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge--brand {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 14px var(--glow);
+}
+
+.badge--align {
+  border: 1px solid var(--ink-dim);
+  color: var(--ink-dim);
+}
+
+.card[data-alignment="heel"] .badge--align {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- portrait ---------- */
+
+.portrait {
+  position: relative;
+  height: 124px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--accent-dim) 0%, #05070c 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 8px 20px -10px #000 inset;
+}
+
+.portrait__foil {
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  background: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.22) 0 2px,
+    rgba(0, 255, 224, 0.14) 2px 4px,
+    rgba(255, 0, 128, 0.12) 4px 6px,
+    transparent 6px 12px
+  );
+}
+
+.portrait__monogram {
+  position: relative;
+  font-family: var(--display);
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #fff;
+  text-shadow:
+    0 0 10px var(--glow),
+    0 6px 0 rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- name ---------- */
+
+.nameplate {
+  text-align: center;
+}
+
+.nameplate__name {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 30px;
+  line-height: 1.02;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-shadow: 0 0 16px var(--glow);
+}
+
+.nameplate__real {
+  margin: 3px 0 0;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* ---------- bio strip ---------- */
+
+.bio {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 7px 0;
+}
+
+.bio__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.bio__cell + .bio__cell {
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.bio__label {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+.bio__value {
+  font-family: var(--numeric);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.bio__sub {
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+}
+
+.hometown {
+  margin: -2px 0 0;
+  text-align: center;
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* ---------- stats ---------- */
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.stat {
+  --v: 0;
+  display: grid;
+  grid-template-columns: 30px 1fr 26px;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat__label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+}
+
+.stat__track {
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.6) inset;
+}
+
+.stat__fill {
+  display: block;
+  height: 100%;
+  width: calc(var(--v) * 1%);
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent-dim), var(--accent) 60%, #fff);
+  box-shadow: 0 0 10px var(--glow);
+  transition: width 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stat__value {
+  font-family: var(--numeric);
+  font-size: 17px;
+  font-weight: 600;
+  text-align: right;
+  line-height: 1;
+}
+
+/* ---------- moves ---------- */
+
+.moves {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.moves__row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.moves__label {
+  flex: none;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+.moves__value {
+  flex: 1;
+  min-width: 0;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---------- title belt ---------- */
+
+.belt {
+  flex: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-align: center;
+  background: linear-gradient(180deg, var(--gold-a), var(--gold-b));
+  box-shadow: 0 0 18px rgba(244, 208, 111, 0.35);
+}
+
+.belt__text {
+  display: block;
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #241a02;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.belt.is-none {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: none;
+}
+
+.belt.is-none .belt__text {
+  color: var(--ink-dim);
+}
+
+/* ---------- status ---------- */
+
+.status {
+  margin: 0;
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* ---------- entrance ---------- */
+
+@keyframes deal-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) rotateY(-90deg) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateY(0deg) scale(1);
+  }
+}
+
+.card.deal-in {
+  animation: deal-in 700ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card.deal-in {
+    animation: none;
+    transform: none;
+    transition: none;
+  }
+
+  .stat__fill {
+    transition: none;
+  }
+
+  .card__glare {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .stage {
+    transform: scale(0.86);
+  }
+}

@@ -4,11 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HTML 5 Boilerplate</title>
-    <!-- <link rel="stylesheet" href="style.css"> -->
+    <title>Super Card</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Teko:wght@500;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
   </head>
   <body>
+    <div class="stage">
+      <article class="card" id="card" data-brand="raw" data-alignment="face">
+        <div class="card__glare" aria-hidden="true"></div>
+
+        <header class="card__head">
+          <div class="ovr">
+            <span class="ovr__value" id="ovr">--</span>
+            <span class="ovr__label">OVR</span>
+          </div>
+          <div class="card__tags">
+            <span class="badge badge--brand" id="brand">BRAND</span>
+            <span class="badge badge--align" id="alignment">ALIGN</span>
+          </div>
+        </header>
+
+        <div class="portrait">
+          <div class="portrait__foil" aria-hidden="true"></div>
+          <span class="portrait__monogram" id="monogram">--</span>
+        </div>
+
+        <div class="nameplate">
+          <h1 class="nameplate__name" id="name">SUPERSTAR</h1>
+          <p class="nameplate__real" id="realName">&nbsp;</p>
+        </div>
+
+        <div class="bio">
+          <div class="bio__cell">
+            <span class="bio__label">HT</span>
+            <span class="bio__value" id="height">--</span>
+            <span class="bio__sub" id="heightImp">&nbsp;</span>
+          </div>
+          <div class="bio__cell">
+            <span class="bio__label">WT</span>
+            <span class="bio__value" id="weight">--</span>
+            <span class="bio__sub" id="weightImp">&nbsp;</span>
+          </div>
+          <div class="bio__cell">
+            <span class="bio__label">DEBUT</span>
+            <span class="bio__value" id="debut">--</span>
+            <span class="bio__sub">&nbsp;</span>
+          </div>
+        </div>
+
+        <p class="hometown" id="hometown">&nbsp;</p>
+
+        <div class="stats">
+          <div class="stat" data-stat="strength">
+            <span class="stat__label">STR</span>
+            <span class="stat__track"><span class="stat__fill"></span></span>
+            <span class="stat__value">--</span>
+          </div>
+          <div class="stat" data-stat="speed">
+            <span class="stat__label">SPD</span>
+            <span class="stat__track"><span class="stat__fill"></span></span>
+            <span class="stat__value">--</span>
+          </div>
+          <div class="stat" data-stat="technique">
+            <span class="stat__label">TEC</span>
+            <span class="stat__track"><span class="stat__fill"></span></span>
+            <span class="stat__value">--</span>
+          </div>
+          <div class="stat" data-stat="charisma">
+            <span class="stat__label">CHA</span>
+            <span class="stat__track"><span class="stat__fill"></span></span>
+            <span class="stat__value">--</span>
+          </div>
+          <div class="stat" data-stat="stamina">
+            <span class="stat__label">STA</span>
+            <span class="stat__track"><span class="stat__fill"></span></span>
+            <span class="stat__value">--</span>
+          </div>
+        </div>
+
+        <footer class="moves">
+          <div class="moves__row">
+            <span class="moves__label">FINISHER</span>
+            <span class="moves__value" id="finisher">--</span>
+          </div>
+          <div class="moves__row">
+            <span class="moves__label">SIGNATURE</span>
+            <span class="moves__value" id="signature">--</span>
+          </div>
+        </footer>
+
+        <div class="belt is-none" id="belt">
+          <span class="belt__text" id="title">NO ACTIVE TITLE</span>
+        </div>
+      </article>
+
+      <p class="status" id="status">CONNECTING&hellip;</p>
+    </div>
+
     <script src="index.js"></script>
-    <h1> super card </h1>
   </body>
 </html>

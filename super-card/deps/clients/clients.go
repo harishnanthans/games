@@ -16,8 +16,9 @@ type Hub interface {
 }
 
 type Client struct {
-	Conn *websocket.Conn
-	Send chan any
+	Conn  *websocket.Conn
+	Cards []map[string]any
+	Send  chan any
 }
 
 func New(ws *websocket.Conn) *Client {

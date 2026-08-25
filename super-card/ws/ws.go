@@ -17,7 +17,7 @@ var upgrader = websocket.Upgrader{
 	},
 }
 
-func WsHandler(w http.ResponseWriter, r *http.Request, room *rooms.Room, one map[string]any) {
+func WsHandler(w http.ResponseWriter, r *http.Request, room *rooms.Room) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println("webhook upgrade error", err)
@@ -27,13 +27,11 @@ func WsHandler(w http.ResponseWriter, r *http.Request, room *rooms.Room, one map
 	log.Println("client connected")
 
 	client := clients.New(conn)
-	room.Register(client)
-
-	room.Broadcast(one)
 
 	go client.WriteMessage()
 
-	// blocks until the client disconnects; unregisters via its own defer
+	room.Register(client)
+
 	client.ReadMessage(room)
 
 	log.Print("client disconnected")

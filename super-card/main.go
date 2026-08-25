@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"log"
-	"math/rand/v2"
 	"net/http"
 	"os"
 	"super_card/deps/rooms"
@@ -19,7 +18,8 @@ type data struct {
 }
 
 func main() {
-	http.HandleFunc("/", ping)
+	http.HandleFunc("/ping", ping)
+	http.Handle("/", http.FileServer(http.Dir("./web")))
 
 	fileByte, err := os.ReadFile("./assets/data.json")
 	if err != nil {
@@ -33,15 +33,12 @@ func main() {
 	}
 
 	room := rooms.NewRoom()
+	room.SetCards(data.SuperStars)
+
 	go room.Run()
 
-	room.ClientsLength()
-
 	http.HandleFunc("/ws", func(w http.ResponseWriter, r *http.Request) {
-		rn := rand.IntN(20)
-		one := data.SuperStars[rn]
-		// fmt.Println(one)
-		ws.WsHandler(w, r, room, one)
+		ws.WsHandler(w, r, room)
 	})
 
 	err = http.ListenAndServe(":8082", nil)
